@@ -1,0 +1,50 @@
+BoxLayout:
+    orientation: 'horizontal'
+    BoxLayout:
+    #separate into 2 main groups for the layout
+        orientation: 'vertical'
+        size_hint_x: 0.25
+
+        Label:
+            text: "Sort by: "
+
+        Spinner:
+            id: sorter_spinner
+            text: "Choose sorting"
+            values: ("watched", "Alphabetical", "Priority")
+            on_text: if sorter_spinner.text == "Priority": app.sort_priority()
+            on_text: if sorter_spinner.text == "Alphabetical": app.sort_alphabetical()
+            on_text: if sorter_spinner.text == "Visited": app.sort_visited()
+
+        Label:
+            text: "Add new movie..."
+
+        Label:
+            text: "Name:"
+        TextInput:
+            id: input_name
+
+
+
+        Button:
+            text:"Add movie"
+            on_press: app.add_movie()
+
+        Button:
+            text: "Clear"
+            on_press: app.clear_input()
+    BoxLayout:
+        orientation: 'vertical'
+
+        Label:
+            size_hint_y: 0.1
+            text: "movie to watch: "
+            id: sort_method_label_output
+
+        BoxLayout:
+            size_hint_y: 1
+            id: entries_box
+            orientation: "vertical"
+        Label:
+            size_hint_y: 0.1
+            text: app.status_text
